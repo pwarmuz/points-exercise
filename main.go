@@ -15,6 +15,12 @@ const (
 	PORT string = ":8080"
 )
 
+func journal(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	for _, v := range ENTRIES {
+		fmt.Fprintf(w, "payer %s, %d points, %s\n", v.Payer, v.Points, v.Transaction)
+	}
+}
+
 func index(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	if req.Method != "GET" {
 		http.Error(w, http.StatusText(http.StatusNotAcceptable), http.StatusNotAcceptable)
@@ -29,6 +35,7 @@ func main() {
 		fmt.Fprint(w, "Not Found")
 	})
 	router.GET("/", index)
+	router.GET("/log", journal)
 	fmt.Printf("Listen and Serve on port %s\n", PORT)
 	log.Fatal(http.ListenAndServe(PORT, router))
 }
