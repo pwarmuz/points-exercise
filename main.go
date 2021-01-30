@@ -16,6 +16,10 @@ const (
 )
 
 func journal(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	if req.Method != "GET" {
+		http.Error(w, http.StatusText(http.StatusNotAcceptable), http.StatusNotAcceptable)
+		return
+	}
 	for _, v := range ENTRIES {
 		fmt.Fprintf(w, "payer %s, %d points, %s\n", v.Payer, v.Points, v.Transaction)
 	}
