@@ -15,14 +15,18 @@ const (
 	PORT string = ":8080"
 )
 
+var (
+	CURRENTUSER string
+)
+
 func journal(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	if req.Method != "GET" {
 		http.Error(w, http.StatusText(http.StatusNotAcceptable), http.StatusNotAcceptable)
 		return
 	}
-	for _, v := range ENTRIES {
-		fmt.Fprintf(w, "payer %s, %d points, %s\n", v.Payer, v.Points, v.Transaction)
-	}
+	// for _, v := range ENTRIES {
+	// 	fmt.Fprintf(w, "payer %s, %d points, %s\n", v.Payer, v.Listed, v.Transaction)
+	// }
 }
 
 func index(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
@@ -30,10 +34,16 @@ func index(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 		http.Error(w, http.StatusText(http.StatusNotAcceptable), http.StatusNotAcceptable)
 		return
 	}
+	if len(CURRENTUSER) == 0 {
+		// use "user" for exercise scenario or create a new user for fresh data
+	}
 	fmt.Fprint(w, "index page")
 }
 
 func main() {
+
+	_ = scenario()
+
 	router := httprouter.New()
 	router.NotFound = http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		fmt.Fprint(w, "Not Found")
