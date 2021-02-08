@@ -23,11 +23,12 @@ go get github.com/pwarmuz/points-exercise
 * to change this, change `const PORT string = ":8080"` to `const PORT string = ":XXXX"` within `routing.go`, where XXXX is the port number, making sure to leave it as a string with `:` prepended
 
 ## **Quick run**
-*In console as a command* 
+*In console as a command*   
+:exclamation: *NOTE: You will probably need to move the points-exercise executable into the source folder and execute it from there to fulfill the html dependencies*
 ```
 points-exercise
 ```
-
+:exclamation: *if you get any html dependencies issues make sure the executable is in the root points-exercise source folder*
 ## *Re-compile and run (if all else fails due to configuration or your source code changes)*
 *In console as a command, with source code location as directory* 
 ```
