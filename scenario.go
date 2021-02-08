@@ -1,7 +1,7 @@
 package main
 
-// scenario is an implied state base on the exercise document
-// user is created "user"
+// scenario is an implied state based on the exercise document
+// user is created as "user"
 // Dannon and Unilever deposit points
 // a deduction of 200 is made
 // Miller Coors and Dannon deposit points

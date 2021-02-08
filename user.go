@@ -17,6 +17,7 @@ type Users struct {
 	Name  string
 }
 
+// NewUsers inializes a Users group
 func NewUsers() *Users {
 	return &Users{mutex: new(sync.RWMutex), User: make(User, 0)}
 }
@@ -24,6 +25,9 @@ func NewUsers() *Users {
 func (u *Users) assign(name string) {
 	u.Name = name
 }
+
+// Create user, also switches to user data if user exists
+// assigns the user as a current user
 func (u *Users) Create(name string) {
 	u.mutex.Lock()
 	_, ok := u.User[name]
@@ -31,12 +35,14 @@ func (u *Users) Create(name string) {
 		u.User[name] = Details{Transactions: NewTransactions(), Balance: NewBalance()}
 	}
 	// HTTP is stateless, so this name assignment is stupid
-	// but it will suffice since this is run locally without cookie generation
+	// but it will suffice since this is run locally without cookie generation or security
 	u.assign(name)
 	u.mutex.Unlock()
 }
 
 // Delete a user
+// Deletes all transactions and balance data
+// assigns "No User" if current user was deleted
 func (u *Users) Delete(name string) {
 	u.mutex.Lock()
 	for ts := range u.User[name].Transactions {
@@ -46,12 +52,18 @@ func (u *Users) Delete(name string) {
 		delete(u.User[name].Balance, payer)
 	}
 	delete(u.User, name)
-	u.assign("No User")
+	if u.Name == name {
+		u.assign("No User")
+	}
 	u.mutex.Unlock()
 }
+
+// transactions is current users transactions data
 func (u *Users) transactions() Transactions {
 	return u.User[u.Name].Transactions
 }
+
+// balance is current users balance data
 func (u *Users) balance() Balance {
 	return u.User[u.Name].Balance
 }
@@ -71,6 +83,7 @@ func (u *Users) Entry(payer string, points int, timestamp string) {
 	u.mutex.Unlock()
 }
 
+// CurrentPoints will sum all points within the current users balance
 func (u *Users) CurrentPoints() Points {
 	var current Points
 	balance := u.ReadBalance()
