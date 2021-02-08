@@ -1,4 +1,4 @@
-# points
+# points-exercise
 Go Lang Points exercise
 
 
