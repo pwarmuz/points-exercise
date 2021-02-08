@@ -2,8 +2,8 @@
 Go Lang Points exercise
 
 
-**renamed project to points-exercise, due to points application in linux**
-# Install
+*renamed project to points-exercise, due to points application in linux*
+# Install 
 * to download source code
 ```
 go get github.com/pwarmuz/points-exercise
@@ -26,7 +26,7 @@ go get github.com/pwarmuz/points-exercise
 points-exercise
 ```
 
-## *Re-compile and run (if all else fails due to configuration)*
+## *Re-compile and run (if all else fails due to configuration or your source code changes)*
 *In command, with source code location as directory* 
 ```
 cd {root of wherever gopath configuration}/src/github.com/pwarmuz/points-exercise
