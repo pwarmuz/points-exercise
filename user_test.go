@@ -5,7 +5,6 @@ import (
 )
 
 func TestUserCreation(t *testing.T) {
-	//var users Users
 	users := NewUsers()
 	users.Create("user")
 	users.Create("user")
@@ -15,7 +14,6 @@ func TestUserCreation(t *testing.T) {
 	}
 }
 func TestUserDeletion(t *testing.T) {
-	//var users Users
 	users := NewUsers()
 	users.Create("doodles")
 	users.Entry("DANNON", 300, "10/31 10AM")
