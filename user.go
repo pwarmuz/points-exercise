@@ -14,7 +14,7 @@ type User map[string]Details
 type Users struct {
 	mutex *sync.RWMutex
 	User  User
-	name  string
+	Name  string
 }
 
 func NewUsers() *Users {
@@ -22,7 +22,7 @@ func NewUsers() *Users {
 }
 
 func (u *Users) assign(name string) {
-	u.name = name
+	u.Name = name
 }
 func (u *Users) Create(name string) {
 	u.mutex.Lock()
@@ -46,13 +46,14 @@ func (u *Users) Delete(name string) {
 		delete(u.User[name].Balance, payer)
 	}
 	delete(u.User, name)
+	u.assign("No User")
 	u.mutex.Unlock()
 }
 func (u *Users) transactions() Transactions {
-	return u.User[u.name].Transactions
+	return u.User[u.Name].Transactions
 }
 func (u *Users) balance() Balance {
-	return u.User[u.name].Balance
+	return u.User[u.Name].Balance
 }
 
 // Entry accepts necessary PointsRecord parameters and returns the PointsRecord
@@ -66,12 +67,13 @@ func (u *Users) Entry(payer string, points int, timestamp string) {
 	u.balance()[payer] = u.balance().Update(payer, points)
 
 	// Associates data to user
-	u.User[u.name] = Details{u.transactions(), u.balance()}
+	u.User[u.Name] = Details{u.transactions(), u.balance()}
 	u.mutex.Unlock()
 }
 
 // Deduct from the transactions and balances
 // Presents a transaction list of deductions
+// Presented as Payer, Points deducted
 func (u *Users) Deduct(deduct Points) ([]Transaction, error) {
 	if deduct < 0 {
 		return nil, errors.New("deduction must be greater than 0, must be considered positive")

@@ -1,0 +1,10 @@
+{{define "yeild"}}
+<div>
+	 <h1>Deductions</h1>
+	 <ul>
+		 {{range .entries}}
+		 <li>{{.Payer}}, {{.Points}} points, now</li>
+		 {{end}}
+	 </ul>
+</div>
+{{end}}
