@@ -1,8 +1,7 @@
 {{define "yeild"}}
 <div>
 	<h1>Current Points:{{.current}} / Current User: {{.user}}</h1>
-
-    <h3>Add</h3>
+	<h3>Add</h3>
 	<form method="POST" action="/add" id="addition" novalidate>
 		<div>
 			<label for="points">Payer:</label>
@@ -15,9 +14,9 @@
 		<div>
 			<button type="submit" name="submitAddition" id="submitAddition">Submit</button>
 		</div>
-    </form>
-    
-    <h3>Deduct</h3>
+	</form>
+	<hr />
+	<h3>Deduct</h3>
 	<form method="POST" action="/deduct" id="deduction" novalidate>
 		<div>
 			<label for="points">Points to deduct:</label>
@@ -26,23 +25,24 @@
 		<div>
 			<button type="submit" name="submitDeduction" id="submitDeduction">Submit</button>
 		</div>
-    </form>
-    
-    <h3>Add User</h3>
+	</form>
+	<hr />
+	<h3>Add User / Change User</h3>
 	<form method="POST" action="/user/create" id="creation" novalidate>
 		<div>
 			<label for="username">Username to create:</label>
-			<input type="text" id="username" name="username" placeholder="username" maxlength=50 />
+			<input type="text" id="username" name="username" placeholder="username" maxlength="50" />
 		</div>
 		<div>
 			<button type="submit" name="submitCreation" id="submitCreation">Submit</button>
 		</div>
 	</form>
-    <h3>Delete User</h3>
+	<hr />
+	<h3>Delete User</h3>
 	<form method="POST" action="/user/delete" id="Deletion" novalidate>
 		<div>
 			<label for="username">Username to create:</label>
-			<input type="text" id="username" name="username" placeholder="username" maxlength=50 />
+			<input type="text" id="username" name="username" placeholder="username" maxlength="50" />
 		</div>
 		<div>
 			<button type="submit" name="submitDeletion" id="submitDeletion">Submit</button>

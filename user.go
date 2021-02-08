@@ -71,6 +71,15 @@ func (u *Users) Entry(payer string, points int, timestamp string) {
 	u.mutex.Unlock()
 }
 
+func (u *Users) CurrentPoints() Points {
+	var current Points
+	balance := u.ReadBalance()
+	for _, n := range balance {
+		current += n.Points
+	}
+	return current
+}
+
 // Deduct from the transactions and balances
 // Presents a transaction list of deductions
 // Presented as Payer, Points deducted
@@ -78,7 +87,10 @@ func (u *Users) Deduct(deduct Points) ([]Transaction, error) {
 	if deduct < 0 {
 		return nil, errors.New("deduction must be greater than 0, must be considered positive")
 	}
-	// Potential issue where too many points are deducted and there is debt
+
+	if u.CurrentPoints() < deduct {
+		return nil, errors.New("not enought points to cover this transaction")
+	}
 
 	var present []Transaction
 	//userTransactions := u.User[name].Transactions

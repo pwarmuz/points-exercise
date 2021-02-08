@@ -11,9 +11,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-const (
-	PORT string = ":8080"
-)
+const PORT string = ":8080"
 
 type Route struct {
 	router          *httprouter.Router
@@ -54,7 +52,6 @@ func (rt *Route) Index(w http.ResponseWriter, req *http.Request, ps httprouter.P
 	}
 	if len(rt.users.Name) == 0 {
 		// use "user" for exercise scenario or create a new user for fresh data
-
 	}
 	var current Points
 	balance := rt.users.ReadBalance()
@@ -68,8 +65,8 @@ func (rt *Route) Index(w http.ResponseWriter, req *http.Request, ps httprouter.P
 	if err := template.Must(rt.TemplatePoints.Clone()).ExecuteTemplate(w, "boilerplate", data); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Fprint(w, "index page")
 }
+
 func (rt *Route) Balance(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	if req.Method != "GET" {
 		http.Error(w, http.StatusText(http.StatusNotAcceptable), http.StatusNotAcceptable)
