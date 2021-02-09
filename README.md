@@ -24,11 +24,12 @@ go get github.com/pwarmuz/points-exercise
 
 ## **Quick run**
 *In console as a command*   
-:exclamation: *NOTE: You will probably need to move the points-exercise executable into the source folder and execute it from there to fulfill the html dependencies*
+:exclamation: *make sure to change the current directory to the source code folder before executing to fulfil the html dependencies, as shown in the command list*
 ```
+cd {root of wherever gopath configuration}/src/github.com/pwarmuz/points-exercise
 points-exercise
 ```
-:exclamation: *if you get any html dependencies issues make sure the executable is in the root points-exercise source folder*
+:exclamation: *if you get any html dependencies issues, and you've selected the source code folder in the console, then move the executable to the points-exercise source code folder*
 ## *Re-compile and run (if all else fails due to configuration or your source code changes)*
 *In console as a command, with source code location as directory* 
 ```
