@@ -5,6 +5,8 @@ import "testing"
 func TestSortedTimestamps(t *testing.T) {
 	// Create unsorted list
 	unsorted := []string{
+		"1/1 3AM",
+		"1/1 7AM",
 		"1/3 10AM",
 		"1/13 4AM",
 		"1/9 10PM",
@@ -28,7 +30,7 @@ func TestSortedTimestamps(t *testing.T) {
 	}
 
 	// Get sorted transactions
-	sorted := sortedTimestamps(transactions)
+	sorted := sortedTimestamps(transactions, "1/1 8AM")
 	for i, n := range sorted {
 		// comparing time.Time
 		if n != parseLayout(wantSort[i]) {

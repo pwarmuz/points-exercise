@@ -22,10 +22,13 @@ func parseLayout(timestamp string) time.Time {
 }
 
 // sortedTimestamps performs the sort based on the current items in the global TRANSACTIONS
-func sortedTimestamps(transactions Transactions) []time.Time {
+func sortedTimestamps(transactions Transactions, expireTS string) []time.Time {
+	expired := parseLayout(expireTS)
 	timestamps := make([]time.Time, 0)
 	for ts := range transactions {
-		timestamps = append(timestamps, ts)
+		if ts.After(expired) {
+			timestamps = append(timestamps, ts)
+		}
 	}
 	sort.Slice(timestamps, func(i, j int) bool {
 		return timestamps[i].Before(timestamps[j])

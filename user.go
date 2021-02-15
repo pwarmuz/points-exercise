@@ -107,7 +107,7 @@ func (u *Users) Deduct(deduct Points) ([]Transaction, error) {
 
 	var present []Transaction
 	//userTransactions := u.User[name].Transactions
-	timestamps := sortedTimestamps(u.transactions())
+	timestamps := sortedTimestamps(u.transactions(), "1/1 8AM")
 	for _, ts := range timestamps {
 		entry := u.transactions()[ts]
 		if deduct > 0 {
