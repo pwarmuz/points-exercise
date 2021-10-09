@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: points
+  labels:
+    run: points
+spec:
+  type: NodePort
+  ports:
+  - name: http 
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    run: points
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: points
+spec:
+  selector:
+    matchLabels:
+      run: points
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: points
+    spec:
+      containers:
+      - name: points
+        image: pwarmuz/points
+        imagePullPolicy: Never
+        ports:
+        - name: http
+          containerPort: 8080 
+    

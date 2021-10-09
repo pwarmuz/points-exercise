@@ -1,6 +1,6 @@
-{{define "yeild"}}
+{{define "yield"}}
 <div>
-	<h1>Current Points:{{.current}} / Current User: {{.user}}</h1>
+	<h1>Current Points: <span id="currentPoints">{{.points}}</span> / Current User: <span id="currentUser">{{.user}}</span></h1>
 	<h3>Add</h3>
 	<form method="POST" action="/add" id="addition" novalidate>
 		<div>
@@ -28,25 +28,86 @@
 	</form>
 	<hr />
 	<h3>Add User / Change User</h3>
-	<form method="POST" action="/user/create" id="creation" novalidate>
+	<form class="form" id="userCreate" novalidate>
 		<div>
 			<label for="username">Username to create:</label>
 			<input type="text" id="username" name="username" placeholder="username" maxlength="50" />
 		</div>
 		<div>
-			<button type="submit" name="submitCreation" id="submitCreation">Submit</button>
+			<button type="submit">Create User</button>
 		</div>
 	</form>
 	<hr />
 	<h3>Delete User</h3>
-	<form method="POST" action="/user/delete" id="Deletion" novalidate>
+	<form class="form" id="userDelete" novalidate>
 		<div>
-			<label for="username">Username to create:</label>
+			<label for="username">Username to delete:</label>
 			<input type="text" id="username" name="username" placeholder="username" maxlength="50" />
 		</div>
 		<div>
-			<button type="submit" name="submitDeletion" id="submitDeletion">Submit</button>
+			<button type="submit">Delete User</button>
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+	window.onload = function () {
+		var formCreateUser = document.getElementById("userCreate")
+		formCreateUser.addEventListener("submit", function (e) {
+			e.preventDefault()
+			// Text example
+			var formData = new FormData(this);
+			// Encode this as form-urlencoded
+			var searchParam = new URLSearchParams();
+			for(var pair of formData){
+				searchParam.append(pair[0], pair[1]);
+			}
+			fetch("/user/create", {
+				method: "PUT",
+				// header is automatically application/x-www-form-urlencoded by PUT due to URLSearchParams
+				body: searchParam
+			})
+				.then(function (response) {
+					console.log(searchParam.get("username"))
+					// Accept text response
+					return response.text()
+				})
+				.then(function (text) {
+					window.location.reload() // lazy reload so user is updated
+					console.log(text)
+				})
+				.catch(function (error) {
+					console.log(error)
+				})
+		})
+
+		var formDeleteUser = document.getElementById("userDelete")
+		formDeleteUser.addEventListener("submit", function (e) {
+			e.preventDefault()
+			// JSON example
+			var formData = new FormData(this)
+			fetch("/user/delete", {
+				method: "DELETE",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(Object.fromEntries(formData)),
+			})
+				.then(function (response) {
+					// Accept JSON response
+					return response.json()
+				})
+				.then(function (data) {
+					// User response data to manipulate DOM
+					document.getElementById("currentPoints").innerHTML = data.Points
+					document.getElementById("currentUser").innerHTML = data.Username
+					console.log(data)
+				})
+				.catch(function (error) {
+					console.log(error)
+				})
+		})
+	}
+</script>
 {{ end }}

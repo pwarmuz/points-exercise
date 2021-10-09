@@ -1,0 +1,18 @@
+
+	for i := 0; i <= 10; i++ { // test for randomness
+		// create empty balance and fill it with a collection
+		statement := NewStatement()
+		statement["payer1"] = Collection{Points(100), 0}
+		statement["payer2"] = Collection{Points(101), 1}
+		statement["payer3"] = Collection{Points(102), 2}
+
+		balanceList := balance.List()
+		for i, listed := range balanceList {
+			if verifyOrder[i].Payer != listed.Payer {
+				t.Error("incomparable balance in index", i, " expected:", verifyOrder[i].Payer, " got: ", listed.Payer)
+			}
+		}
+		if len(balanceList) != len(balance) {
+			t.Error("unequal balance list length")
+		}
+	}

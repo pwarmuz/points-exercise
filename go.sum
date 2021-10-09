@@ -1,0 +1,4 @@
+github.com/julienschmidt/httprouter v1.3.0 h1:U0609e9tgbseu3rBINet9P48AI/D3oJs4dN7jwJOQ1U=
+github.com/julienschmidt/httprouter v1.3.0/go.mod h1:JR6WtHb+2LUe8TCKY3cZOxFyyO8IZAc4RVcycCCAKdM=
+github.com/pwarmuz/points-exercise v0.0.0-20210215212633-fb03b5367931 h1:GEPieZCIlqZ4/1WMzwPiWlH47OG15HNEUSJg5Dl3Vls=
+github.com/pwarmuz/points-exercise v0.0.0-20210215212633-fb03b5367931/go.mod h1:x1wmGj2exlhOVDIzv6VDX7frdapjZybbjAkoIvM0fiQ=
