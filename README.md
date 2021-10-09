@@ -47,7 +47,7 @@ go get github.com/pwarmuz/points-exercise
 - To run kubernetes deployment use ```kubectl apply -f points-web.yml```
 - If using kubenetes, use port-forward to locally test application with ```kubectl port-forward deployment/points 8080:8080```
 - assuming 8080 were the port targeted
-- 
+
 - # removing
 - To remove the docker images use ```docker rmi pwarmuz/points```
 - If you want to remove dangling images use ```docker image prune --filter "dangling=true"```
