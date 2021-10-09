@@ -38,20 +38,20 @@ go get github.com/pwarmuz/points-exercise
 > There is an option to recompile it from source under the run heading below if there are any running issues
 
 # Docker / Kubernetes
-There is no downloadable repo for this. The intent is to simulate a private project that is built and deployed.
-If running minikube then ensure ```eval $(minikube docker-env)``` is set to target the kubernetes environment
-This dockerfile requires buildkit 1, use ```export DOCKER_BUILDKIT=1```
-To run the unit test use ```docker build -t pwarmuz/points . --target unit-test```
-To run the lint use ```docker build -t pwarmuz/points . --target lint```
-To run locally use ```docker build -t pwarmuz/points . --target localhost```
-To run kubernetes deployment use ```kubectl apply -f points-web.yml```
-If using kubenetes, use port-forward to locally test application with ```kubectl port-forward deployment/points 8080:8080```
-assuming 8080 were the port targeted
-
--- removing
-To remove the docker images use ```docker rmi pwarmuz/points```
-If you want to remove dangling images use ```docker image prune --filter "dangling=true"```
-To remove kubernetes deployment use ```kubectl delete -f points-web.yml```
+- There is no downloadable repo for this. The intent is to simulate a private project that is built and deployed.
+- If running minikube then ensure ```eval $(minikube docker-env)``` is set to target the kubernetes environment
+- This dockerfile requires buildkit 1, use ```export DOCKER_BUILDKIT=1```
+- To run the unit test use ```docker build -t pwarmuz/points . --target unit-test```
+- To run the lint use ```docker build -t pwarmuz/points . --target lint```
+- To run locally use ```docker build -t pwarmuz/points . --target localhost```
+- To run kubernetes deployment use ```kubectl apply -f points-web.yml```
+- If using kubenetes, use port-forward to locally test application with ```kubectl port-forward deployment/points 8080:8080```
+- assuming 8080 were the port targeted
+- 
+- # removing
+- To remove the docker images use ```docker rmi pwarmuz/points```
+- If you want to remove dangling images use ```docker image prune --filter "dangling=true"```
+- To remove kubernetes deployment use ```kubectl delete -f points-web.yml```
 
 # Run
 
